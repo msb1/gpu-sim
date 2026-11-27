@@ -1,0 +1,4 @@
+sudo env KUBECONFIG="$HOME/.kube/config" \
+  "$HOME/go/bin/cloud-provider-kind" \
+  --gateway-channel=disabled \
+  --enable-default-ingress=false

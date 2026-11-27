@@ -1,0 +1,11 @@
+# Add these jobs under scrape_configs in the EXISTING Prometheus configuration.
+# Replace REMOTE_PC_IP with an address that Prometheus can use to reach the
+# Docker host; localhost only works if Prometheus itself runs on the host.
+- job_name: gpu-sim-dcgm
+  scrape_interval: 2s
+  static_configs:
+    - targets: ['REMOTE_PC_IP:9400']
+- job_name: gpu-sim-serving
+  scrape_interval: 2s
+  static_configs:
+    - targets: ['REMOTE_PC_IP:8002']

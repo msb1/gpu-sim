@@ -218,3 +218,11 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# local files and folders
+archive/
+results/
+.python-version
+digest.md 
+AGENTS.md
+dashboard-test.txt

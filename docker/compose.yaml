@@ -1,0 +1,9 @@
+# Build the engine image for kind. The setup script uses `docker compose build`;
+# kind owns the runtime container. Do not use `docker compose up` for the cluster.
+services:
+  gpu-simulator:
+    image: gpu-simulator:kind
+    build:
+      context: .
+      dockerfile: Dockerfile
+    profiles: [build]

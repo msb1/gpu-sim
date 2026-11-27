@@ -1,0 +1,27 @@
+[project]
+name = "gpu-sim"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "msb1", email = "44041613+msb1@users.noreply.github.com" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "fastapi>=0.162.5",
+    "langgraph>=1.2.24",
+    "prometheus-client>=0.26.0",
+    "uvicorn>=0.54.0",
+]
+
+[project.scripts]
+gpu-sim = "gpu_sim:main"
+
+[build-system]
+requires = ["uv_build>=0.13.7,<0.14.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "ruff>=0.17.5",
+]

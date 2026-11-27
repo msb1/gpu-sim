@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: gpu-serving
+---
+apiVersion: kueue.x-k8s.io/v1beta1
+kind: ResourceFlavor
+metadata:
+  name: kwok-gpu
+spec:
+  nodeLabels:
+    type: kwok
+  nodeTaints:
+    - key: kwok.x-k8s.io/node
+      value: fake
+      effect: NoSchedule
+---
+apiVersion: kueue.x-k8s.io/v1beta1
+kind: ClusterQueue
+metadata:
+  name: gpu-serving
+spec:
+  namespaceSelector:
+    matchLabels:
+      kubernetes.io/metadata.name: gpu-serving
+  resourceGroups:
+    - coveredResources: [cpu, memory, nvidia.com/gpu]
+      flavors:
+        - name: kwok-gpu
+          resources:
+            - name: cpu
+              nominalQuota: "__CPU_QUOTA__"
+            - name: memory
+              nominalQuota: "__MEMORY_QUOTA__"
+            - name: nvidia.com/gpu
+              nominalQuota: "__GPU_QUOTA__"
+---
+apiVersion: kueue.x-k8s.io/v1beta1
+kind: LocalQueue
+metadata:
+  name: gpu-serving
+  namespace: gpu-serving
+spec:
+  clusterQueue: gpu-serving
